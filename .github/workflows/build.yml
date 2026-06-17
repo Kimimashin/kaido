@@ -12,14 +12,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # This logs into Docker Hub using secrets we will create next
+    # Logs into Docker Hub using secrets
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # This builds your Dockerfile and pushes it to Docker Hub
+    # Builds your Dockerfile and pushes it to Docker Hub
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
@@ -28,19 +28,3 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/docker
-
-    # Authenticate to Google Cloud
-    - name: Google Auth
-      uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.GCP_SA_KEY }}'
-
-    # Deploy the image to multiple global Google Cloud regions
-    - name: Deploy to Cloud Run
-      run: |
-        gcloud beta run deploy xray-server \
-          --image=docker.io/${{ secrets.DOCKER_USERNAME }}/docker \
-          --regions=us-central1,us-east1,asia-southeast1,asia-northeast1,europe-west3 \
-          --platform=managed \
-          --allow-unauthenticated \
-          --max-instances=40
