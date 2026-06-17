@@ -1,2 +1,2 @@
 FROM alpine:latest
-CMD ["echo", "Hello from my custom image!"]
+CMD ["echo", "Hello from my automated build!"]
