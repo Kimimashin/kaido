@@ -35,12 +35,12 @@ jobs:
       with:
         credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-    # Deploy the image to Google Cloud Run with a max instance limit of 10
+    # Deploy the image to multiple global Google Cloud regions
     - name: Deploy to Cloud Run
       run: |
-        gcloud run deploy xray-server \
+        gcloud beta run deploy xray-server \
           --image=docker.io/${{ secrets.DOCKER_USERNAME }}/docker \
-          --region=us-central1 \
+          --regions=us-central1,us-east1,asia-southeast1,asia-northeast1,europe-west3 \
           --platform=managed \
           --allow-unauthenticated \
-          --max-instances=10
+          --max-instances=40
