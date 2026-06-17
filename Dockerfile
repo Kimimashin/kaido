@@ -1,19 +1,14 @@
-FROM teddysun/xray:latest
-
-# Install openssl to generate self-signed certificates
+# Step 1: Use Alpine to safely generate the certificates without errors
+FROM alpine:latest AS cert-builder
 RUN apk add --no-cache openssl
-
-# Create the directory structure for your certificates
 RUN mkdir -p /etc/ssl/certs/
-
-# Generate the self-signed certificate and private key files automatically
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/certs/privkey.pem \
     -out /etc/ssl/certs/fullchain.pem \
-    -subj "/CN=://firebase-settings.crashlytics.com"
+    -subj "/CN=://firebase-settings.crashlytics.com.com"
 
-# Copy your config file into the folder where Xray expects it
+# Step 2: Use the official Xray image and copy the files over
+FROM teddysun/xray:latest
+COPY --from=cert-builder /etc/ssl/certs/ /etc/ssl/certs/
 COPY config.json /etc/xray/config.json
-
-# Tell Xray to start up automatically using your config file
 CMD ["xray", "-config", "/etc/xray/config.json"]
