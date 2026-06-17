@@ -17,6 +17,16 @@
       },
       "streamSettings": {
         "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "firebase-settings.crashlytics.com",
+          "certificates": [
+            {
+              "certificateFile": "/etc/ssl/certs/fullchain.pem",
+              "keyFile": "/etc/ssl/certs/privkey.pem"
+            }
+          ]
+        },
         "wsSettings": {
           "path": "/kimimashin"
         }
@@ -35,6 +45,16 @@
       },
       "streamSettings": {
         "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "firebase-settings.crashlytics.com",
+          "certificates": [
+            {
+              "certificateFile": "/etc/ssl/certs/fullchain.pem",
+              "keyFile": "/etc/ssl/certs/privkey.pem"
+            }
+          ]
+        },
         "wsSettings": {
           "path": "/kimimashin"
         }
@@ -53,6 +73,16 @@
       },
       "streamSettings": {
         "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "firebase-settings.crashlytics.com",
+          "certificates": [
+            {
+              "certificateFile": "/etc/ssl/certs/fullchain.pem",
+              "keyFile": "/etc/ssl/certs/privkey.pem"
+            }
+          ]
+        },
         "wsSettings": {
           "path": "/kimimashin"
         }
@@ -63,7 +93,7 @@
       "protocol": "shadowsocks",
       "settings": {
         "method": "aes-256-gcm",
-        "password": "your-strong-ss-password",
+        "password": "0000",
         "network": "tcp,udp"
       }
     },
