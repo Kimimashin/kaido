@@ -4,12 +4,12 @@
   },
   "inbounds": [
     {
-      "port": 80,
+      "port": 443,
       "protocol": "vless",
       "settings": {
         "clients": [
           {
-            "id": "00000000-0000-0000-0000-000000000000",
+            "id": "36376535-3738-5936-3932-353232303033",
             "level": 0
           }
         ],
@@ -18,11 +18,66 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/your-payload-path",
-          "headers": {
-            "Host": "://bughost.com"
-          }
+          "path": "/kimimashin"
         }
+      }
+    },
+    {
+      "port": 8443,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "36376535-3738-5936-3932-353232303033",
+            "level": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/kimimashin"
+        }
+      }
+    },
+    {
+      "port": 2222,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "0000",
+            "level": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/kimimashin"
+        }
+      }
+    },
+    {
+      "port": 10001,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "aes-256-gcm",
+        "password": "your-strong-ss-password",
+        "network": "tcp,udp"
+      }
+    },
+    {
+      "port": 51820,
+      "protocol": "wireguard",
+      "settings": {
+        "secretKey": "YOUR_SERVER_PRIVATE_KEY_HERE",
+        "peers": [
+          {
+            "publicKey": "YOUR_CLIENT_PUBLIC_KEY_HERE",
+            "allowedIPs": ["10.0.0.2/32"]
+          }
+        ]
       }
     }
   ],
