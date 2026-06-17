@@ -4,7 +4,7 @@
   },
   "inbounds": [
     {
-      "port": 443,
+      "port": 8080,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -33,7 +33,7 @@
       }
     },
     {
-      "port": 8443,
+      "port": 8080,
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -61,7 +61,7 @@
       }
     },
     {
-      "port": 2222,
+      "port": 8080,
       "protocol": "trojan",
       "settings": {
         "clients": [
@@ -89,7 +89,7 @@
       }
     },
     {
-      "port": 10001,
+      "port": 8080,
       "protocol": "shadowsocks",
       "settings": {
         "method": "aes-256-gcm",
@@ -98,7 +98,7 @@
       }
     },
     {
-      "port": 51820,
+      "port": 8080,
       "protocol": "wireguard",
       "settings": {
         "secretKey": "YOUR_SERVER_PRIVATE_KEY_HERE",
