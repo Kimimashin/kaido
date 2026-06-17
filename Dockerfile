@@ -1,7 +1,14 @@
-FROM teddysun/xray:latest
+FROM alpine:latest
 
-# Copy your config file into the folder where Xray expects it
+# Install Nginx and Xray core binaries
+RUN apk add --no-cache nginx xray
+
+# Copy your configuration files into place
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY config.json /etc/xray/config.json
 
-# Tell Xray to start up automatically using your config file
-CMD ["xray", "-config", "/etc/xray/config.json"]
+# Expose Nginx port
+EXPOSE 8080
+
+# Start both Xray and Nginx processes together
+CMD ["sh", "-c", "xray -config /etc/xray/config.json & nginx -g 'daemon off;'"]
