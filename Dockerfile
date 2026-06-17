@@ -1,8 +1,11 @@
-# Use the official Nginx lightweight web server image
-FROM nginx:alpine
+# Use a lightweight official image containing the Xray proxy network core engine
+FROM teddysun/xray:latest
 
-# Copy a custom message directly into Nginx's default webpage folder
-RUN echo '<h1>Welcome to Kimimashin Custom Docker App! Dev version 1.0</h1>' > /usr/share/nginx/html/index.html
+# Copy your custom NetMod config settings directly into the Xray configuration folder
+COPY config.json /etc/xray/config.json
 
-# Tell Docker to open port 80 so we can view the website
+# Expose port 80 for the inbound WebSocket tunneling traffic
 EXPOSE 80
+
+# Launch the network core automatically using your custom rules
+CMD ["xray", "-config", "/etc/xray/config.json"]
