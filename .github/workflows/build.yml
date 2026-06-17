@@ -28,3 +28,19 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKER_USERNAME }}/docker
+
+    # Authenticate to Google Cloud
+    - name: Google Auth
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+    # Deploy the image to Google Cloud Run with a max instance limit of 10
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy xray-server \
+          --image=docker.io/${{ secrets.DOCKER_USERNAME }}/docker \
+          --region=us-central1 \
+          --platform=managed \
+          --allow-unauthenticated \
+          --max-instances=10
